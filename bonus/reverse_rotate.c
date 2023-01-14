@@ -5,66 +5,51 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: iabkadri <iabkadri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/14 10:44:15 by iabkadri          #+#    #+#             */
-/*   Updated: 2023/01/14 10:44:16 by iabkadri         ###   ########.fr       */
+/*   Created: 2023/01/14 10:45:31 by iabkadri          #+#    #+#             */
+/*   Updated: 2023/01/14 10:45:32 by iabkadri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 void	rra(t_stack **a)
 {
 	t_stack	*last;
+	t_stack	*temp;
+	int		size;
 
-	if (ft_lstsize(*a) <= 1)
+	if (*a == NULL)
 		return ;
 	last = ft_lstlast(*a);
+	size = ft_lstsize(*a) - 1;
+	temp = *a;
+	while (--size > 0)
+		temp = temp->next;
 	last->next = *a;
-	(*a)->prev = last;
-	last->prev->next = NULL;
-	last->prev = NULL;
 	*a = last;
-	ft_fprintf(1, "rra\n");
+	temp->next = NULL;
 }
 
 void	rrb(t_stack **b)
 {
 	t_stack	*last;
 	t_stack	*temp;
+	int		size;
 
-	if (ft_lstsize(*b) <= 1)
+	if (*b == NULL)
 		return ;
 	last = ft_lstlast(*b);
-	temp = last->prev;
+	size = ft_lstsize(*b) - 1;
+	temp = *b;
+	while (--size > 0)
+		temp = temp->next;
 	last->next = *b;
-	(*b)->prev = last;
-	temp->next = NULL;
-	last->prev = NULL;
 	*b = last;
-	ft_fprintf(1, "rrb\n");
+	temp->next = NULL;
 }
 
 void	rrr(t_stack **a, t_stack **b)
 {
-	t_stack	*last;
-
-	if (ft_lstsize(*a) > 1)
-	{
-		last = ft_lstlast(*a);
-		last->next = *a;
-		(*a)->prev = last;
-		last->prev->next = NULL;
-		last->prev = NULL;
-		*a = last;
-	}
-	if (ft_lstsize(*b) > 1)
-	{
-		last = ft_lstlast(*b);
-		last->next = *b;
-		(*b)->prev = last;
-		last->prev->next = NULL;
-		last->prev = NULL;
-		*b = last;
-	}
-	ft_fprintf(1, "rrr\n");
+	rra(a);
+	rrb(b);
 }

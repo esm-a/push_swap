@@ -1,45 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   rotate_tmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iabkadri <iabkadri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/14 10:43:43 by iabkadri          #+#    #+#             */
-/*   Updated: 2023/01/14 17:57:08 by iabkadri         ###   ########.fr       */
+/*   Created: 2023/01/11 15:35:04 by iabkadri          #+#    #+#             */
+/*   Updated: 2023/01/14 17:53:38 by iabkadri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_sorted(t_stack *a)
+void	rt(t_stack **t)
 {
-	while (a && a->next)
-	{
-		if (a->n > a->next->n)
-			return (0);
-		a = a->next;
-	}
-	return (1);
+	t_stack	*first;
+	t_stack	*last;
+
+	if (ft_lstsize(*t) <= 1)
+		return ;
+	first = *t;
+	last = ft_lstlast(*t);
+	last->next = first;
+	first->prev = last;
+	*t = first->next;
+	first->next = NULL;
 }
 
-int	main(int argc, char *argv[])
+void	rrt(t_stack **t)
 {
-	t_stack	*a;
-	t_stack	*b;
+	t_stack	*last;
+	t_stack	*temp;
 
-	if (argc == 1)
-		exit(1);
-	a = NULL;
-	b = NULL;
-	handle_error(&a, argv);
-	if (is_sorted(a))
-		exit(0);
-	if (ft_lstsize(a) <= 3)
-		sort_three_a(&a);
-	else if (ft_lstsize(a) == 5)
-		sort_five(&a, &b);
-	else
-		sort(&a, &b);
-	return (0);
+	if (ft_lstsize(*t) <= 1)
+		return ;
+	last = ft_lstlast(*t);
+	temp = last->prev;
+	last->next = *t;
+	(*t)->prev = last;
+	temp->next = NULL;
+	last->prev = NULL;
+	*t = last;
 }

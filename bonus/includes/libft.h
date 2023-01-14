@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iabkadri <iabkadri@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:34:01 by iabkadri          #+#    #+#             */
-/*   Updated: 2023/01/12 15:02:45 by iabkadri         ###   ########.fr       */
+/*   Updated: 2023/01/08 22:40:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@
 typedef struct stack
 {
 	int				n;
-	int				index_b;
-	int				index_a;
+	int				indx;
 	struct stack	*next;
-	struct stack	*prev;
 }	t_stack;
 
 int		ft_isalpha(int c);

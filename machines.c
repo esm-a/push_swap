@@ -1,45 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   machines.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iabkadri <iabkadri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/14 10:43:43 by iabkadri          #+#    #+#             */
-/*   Updated: 2023/01/14 17:57:08 by iabkadri         ###   ########.fr       */
+/*   Created: 2023/01/13 11:52:19 by iabkadri          #+#    #+#             */
+/*   Updated: 2023/01/13 11:52:57 by iabkadri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_sorted(t_stack *a)
+void	rs_machine(t_stack **stk, int counter, void (*rs)(t_stack **))
 {
-	while (a && a->next)
-	{
-		if (a->n > a->next->n)
-			return (0);
-		a = a->next;
-	}
-	return (1);
+	while (counter-- > 0)
+		(*rs)(stk);
 }
 
-int	main(int argc, char *argv[])
+void	rrs_machine(t_stack **stk, int counter, void (*rrs)(t_stack **))
 {
-	t_stack	*a;
-	t_stack	*b;
+	while (counter-- > 0)
+		(*rrs)(stk);
+}
 
-	if (argc == 1)
-		exit(1);
-	a = NULL;
-	b = NULL;
-	handle_error(&a, argv);
-	if (is_sorted(a))
-		exit(0);
-	if (ft_lstsize(a) <= 3)
-		sort_three_a(&a);
-	else if (ft_lstsize(a) == 5)
-		sort_five(&a, &b);
-	else
-		sort(&a, &b);
-	return (0);
+void	rrr_m(t_stack **a, t_stack **b, int counter)
+{
+	while (counter-- > 0)
+		rrr(a, b);
+}
+
+void	rr_m(t_stack **a, t_stack **b, int counter)
+{
+	while (counter-- > 0)
+		rr(a, b);
 }

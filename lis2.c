@@ -1,45 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lis2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iabkadri <iabkadri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/14 10:43:43 by iabkadri          #+#    #+#             */
-/*   Updated: 2023/01/14 17:57:08 by iabkadri         ###   ########.fr       */
+/*   Created: 2023/01/14 10:43:18 by iabkadri          #+#    #+#             */
+/*   Updated: 2023/01/14 12:26:00 by iabkadri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_sorted(t_stack *a)
+t_lis	*ft_alloc(int *arr, int *sub, int *l)
 {
-	while (a && a->next)
+	t_lis	*lis;
+
+	lis = malloc(sizeof(t_lis));
+	if (lis == NULL)
 	{
-		if (a->n > a->next->n)
-			return (0);
-		a = a->next;
+		free(arr);
+		free(sub);
+		free(l);
+		return (NULL);
 	}
-	return (1);
+	return (lis);
 }
 
-int	main(int argc, char *argv[])
+void	free_lis(t_lis *lis, int *arr, int *sub, int *l)
 {
-	t_stack	*a;
-	t_stack	*b;
+	free(lis);
+	free(arr);
+	free(sub);
+	free(l);
+}
 
-	if (argc == 1)
-		exit(1);
-	a = NULL;
-	b = NULL;
-	handle_error(&a, argv);
-	if (is_sorted(a))
-		exit(0);
-	if (ft_lstsize(a) <= 3)
-		sort_three_a(&a);
-	else if (ft_lstsize(a) == 5)
-		sort_five(&a, &b);
-	else
-		sort(&a, &b);
-	return (0);
+void	check_helper(int *arr, int *sub, int *l)
+{
+	if (l == NULL)
+	{
+		free(arr);
+		free(sub);
+	}
+	if (sub == NULL)
+	{
+		free(arr);
+		free(l);
+	}
 }

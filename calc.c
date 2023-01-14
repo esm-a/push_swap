@@ -1,45 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   calc.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: iabkadri <iabkadri@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/14 10:43:43 by iabkadri          #+#    #+#             */
-/*   Updated: 2023/01/14 17:57:08 by iabkadri         ###   ########.fr       */
+/*   Created: 2023/01/13 11:41:33 by iabkadri          #+#    #+#             */
+/*   Updated: 2023/01/13 11:47:56 by iabkadri         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	is_sorted(t_stack *a)
+int	get_largest(t_stack *a)
 {
-	while (a && a->next)
+	int	largest;
+
+	largest = a->n;
+	a = a->next;
+	while (a)
 	{
-		if (a->n > a->next->n)
-			return (0);
+		if (largest <= a->n)
+			largest = a->n;
 		a = a->next;
 	}
-	return (1);
+	return (largest);
 }
 
-int	main(int argc, char *argv[])
+int	get_smallest(t_stack *s)
 {
-	t_stack	*a;
-	t_stack	*b;
+	int	smallest;
 
-	if (argc == 1)
-		exit(1);
-	a = NULL;
-	b = NULL;
-	handle_error(&a, argv);
-	if (is_sorted(a))
-		exit(0);
-	if (ft_lstsize(a) <= 3)
-		sort_three_a(&a);
-	else if (ft_lstsize(a) == 5)
-		sort_five(&a, &b);
-	else
-		sort(&a, &b);
-	return (0);
+	smallest = s->n;
+	s = s->next;
+	while (s)
+	{
+		if (s->n < smallest)
+			smallest = s->n;
+		s = s->next;
+	}
+	return (smallest);
+}
+
+int	ft_min(int a, int b)
+{
+	if (a < b)
+		return (a);
+	return (b);
+}
+
+int	ft_abs(int x)
+{
+	if (x < 0)
+		return (-x);
+	return (x);
 }
